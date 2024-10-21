@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SERVER_API_PATH = import.meta.env.VITE_SERVER_API_PATH;
 
@@ -57,72 +58,86 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <p>
-                    <label>Username: </label>
-                    <input 
-                        type="text" 
-                        name="username" 
-                        value={formData.username} 
-                        onChange={handleChange} 
-                        required
-                    />
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+                <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label className="block text-gray-700">Username</label>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            value={formData.username} 
+                            onChange={handleChange} 
+                            required
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700">Password</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            value={formData.password} 
+                            onChange={handleChange} 
+                            required
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$"
+                            title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            name="confPassword"
+                            value={formData.confPassword} 
+                            onChange={handleChange} 
+                            required
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700">Restaurant</label>
+                        <input 
+                            type="text" 
+                            name="restaurantName"
+                            value={formData.restaurantName} 
+                            onChange={handleChange} 
+                            required
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700">Email</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleChange} 
+                            required
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors">
+                        Register
+                    </button>
+                </form>
+                <p className="mt-4 text-center text-gray-600">
+                    Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
                 </p>
-                <p>
-                    <label>Password: </label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        value={formData.password} 
-                        onChange={handleChange} 
-                        required
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$"
-                        title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
-                    />
-                </p>
-                <p>
-                    <label>Confirm Password: </label>
-                    <input 
-                        type="password" 
-                        name="confPassword"
-                        value={formData.confPassword} 
-                        onChange={handleChange} 
-                        required
-                    />
-                </p>
-                <p>
-                    <label>Restaurant: </label>
-                    <input 
-                        type="text" 
-                        name="restaurantName"
-                        value={formData.restaurantName} 
-                        onChange={handleChange} 
-                        required
-                    />
-                </p>
-                <p>
-                    <label>Email: </label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        value={formData.email} 
-                        onChange={handleChange} 
-                        required
-                    />
-                </p>
-                <button type="submit">Register</button>
-            </form>
-            {message && (
-                <p style={{ color: messageType === 'success' ? 'green' : 'red' }}>
-                    {message}
-                </p>
-            )}
+                {message && (
+                    <p className={`mt-4 text-center font-bold ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+                        {message}
+                    </p>
+                )}
+            </div>
         </div>
     );
 }
 
 export default Register;
+
 
 
 
