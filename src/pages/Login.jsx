@@ -72,8 +72,6 @@ const Login = () => {
               value={formData.password} 
               onChange={handleChange} 
               required
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$"
-              title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
