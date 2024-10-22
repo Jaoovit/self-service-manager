@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { UserContext } from '../context/UserContext'; // Import UserContext
 
 const SERVER_API_PATH = import.meta.env.VITE_SERVER_API_PATH;
 
@@ -12,6 +13,7 @@ const Login = () => {
   
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);  // Access setUser from Context
 
   const handleChange = (e) => {
     setFormData({
@@ -34,7 +36,14 @@ const Login = () => {
         const { user } = response.data;
         console.log('Login success:', user);
 
-        navigate('/homepage');
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Store user in Context
+        setUser(user);
+
+        // Redirect to homepage
+        navigate('/');
       }
     } catch (err) {
       if (err.response && err.response.status === 401) {
@@ -92,4 +101,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
